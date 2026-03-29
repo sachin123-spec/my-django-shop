@@ -22,10 +22,10 @@
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
 
-                {% if product.image %}
-    <img src="{{ product.image.url }}">
-{% elif product.static_image %}
-    <img src="{% static product.static_image %}">
+                {% if product.static_image %}
+    <img src="{% static product.static_image %}" class="card-img-top" style="height:300px; object-fit:cover;">
+{% else %}
+    <img src="{% static 'images/no-image.jpg' %}" class="card-img-top" style="height:300px; object-fit:cover;">
 {% endif %}
 
                 <div class="card-body">
