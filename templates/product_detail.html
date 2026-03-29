@@ -8,22 +8,29 @@
 
 <nav class="navbar navbar-light bg-light px-4">
     <a class="navbar-brand fw-bold" href="/">My Shop</a>
+    <a href="/" class="btn btn-outline-primary">Home</a>
+    <a href="{% url 'cart_detail' %}" class="btn btn-outline-dark ms-2">Cart</a>
 </nav>
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             {% if product.image %}
-            <img src="{{ product.image.url }}" class="img-fluid rounded" style="max-height:500px; object-fit:cover;">
+                <img src="{{ product.image.url }}" class="img-fluid rounded" style="max-height:500px; object-fit:cover;">
+            {% elif product.static_image %}
+                <img src="{% static product.static_image %}" class="img-fluid rounded" style="max-height:500px; object-fit:cover;">
+            {% else %}
+                <img src="{% static 'images/no-image.jpg' %}" class="img-fluid rounded" style="max-height:500px; object-fit:cover;">
             {% endif %}
         </div>
+
         <div class="col-md-6">
             <h2>{{ product.name }}</h2>
             <p><strong>Category:</strong> {{ product.category.name }}</p>
             <p>{{ product.description }}</p>
             <h4 class="text-success">₹{{ product.price }}</h4>
             <p><strong>Stock:</strong> {{ product.stock }}</p>
-           <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
             <a href="/" class="btn btn-secondary">Back to Home</a>
         </div>
     </div>
